@@ -1,0 +1,18 @@
+@media screen and (min-width: 694px) and (max-width: 915px) {
+    .movie-details {
+        display: grid;
+    }
+}
+
+@media screen and (min-width: 652px) and (max-width: 693px) {
+    .movie-details {
+        display: grid;
+    }
+}
+
+
+@media screen and (max-width: 651px) {
+    .movie-details {
+        display: grid;
+    }
+}
