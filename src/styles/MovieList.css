@@ -1,3 +1,11 @@
+.errormessage {
+    margin-top: 400px;
+}
+
+.apierror {
+    margin-top: 200px;
+}
+
 @media screen and (min-width: 694px) and (max-width: 915px) {
     .movie-details {
         display: grid;

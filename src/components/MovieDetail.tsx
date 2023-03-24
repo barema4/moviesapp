@@ -19,26 +19,36 @@ type Params = {
 
 const MovieDetail = () => {
   const [movie, setMovie] = useState<Movie | null>(null);
+  const [errorMessage , setErrorMessage] = useState('');
   const { id } = useParams<Params>();
 
   useEffect(() => {
     axios.get(`https://www.omdbapi.com/?i=${id}&apiKey=6f9dc29f`)
       .then(response => {
-        setMovie(response.data);
+        if(response.data.Error){
+          setErrorMessage(response.data.Error)
+        }
+        if(response.data){
+          setMovie(response.data);
+        }
       })
       .catch(error => {
-        console.log(error);
+        setErrorMessage(error)
       });
   }, [id]);
 
   if (!movie) {
-    return <div className='justify-center'>Loading...</div>;
-  }
+    return <div className='flex flex-row text-red-600 justify-center errormessage '>Loading...</div>;
+  } 
 
+  let poster
+  const DEFAULT_PLACEHOLDER_IMAGE = "https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SX300.jpg";
+  poster = movie.Poster === "N/A" ? DEFAULT_PLACEHOLDER_IMAGE : movie.Poster;
   return (
-    <div className='m-8 flex flex-wrap flex-row justify-center movie-details items-center'>
+    <>
+    {errorMessage ? <div className='flex flex-row text-red-600 justify-center text-red-600 errormessage'>{errorMessage}</div> : <div className='m-8 flex flex-wrap flex-row justify-center movie-details items-center'>
       <div className='basis-1/2 md:shrink-0'>
-        <img src={movie.Poster} alt={movie.Title} className="w-[500px] h-[350px]" />
+        <img src={poster} alt={movie.Title} className="w-[500px] h-[350px]" />
       </div>
       <div className='basis-1/3'>
         <div className='grid grid-cols-2 gap-3 mb-3'>
@@ -82,7 +92,9 @@ const MovieDetail = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div>}
+    </>
+    
   );
 };
 
