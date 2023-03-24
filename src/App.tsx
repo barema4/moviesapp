@@ -1,12 +1,16 @@
 import React from 'react';
-function App() {
+import {Route, Routes } from 'react-router-dom';
+import MovieList from '../src/components/MovieList';
+import MovieDetail from './components/MovieDetail';
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-       <p>Movies</p>
-      </header>
-    </div>
+      <Routes>
+         <Route path="/" element={<MovieList/>} />
+         <Route path="/:id" element={<MovieDetail/>} />
+      </Routes>
   );
-}
+};
 
 export default App;
+
