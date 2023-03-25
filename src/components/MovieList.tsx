@@ -35,7 +35,6 @@ const MovieList = () => {
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     setMovies([])
     event.preventDefault();
-    console.log(searchTerm, 'searchTerm')
     const errors = validateSearchInput(searchTerm)
     if(errors){
       return setErrorMessage(errors)
@@ -80,7 +79,7 @@ const MovieList = () => {
   return (
   <div className="m-8">
     <div className='flex flex-col items-center'>
-        <h1 className="ml-6 text-6xl font-bold font-serif text-slate-300">The Movie Search</h1>
+        <h1 className="ml-6 text-6xl font-bold font-serif text-slate-500">The Movie Search</h1>
         <form className="m-6 flex flex-col items-center" onSubmit={handleSearch}>
           <input className='text-[#e2e8f0] px-4 py-2 w-96 rounded-lg bg-[#334155] outline-0 ring-4 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500' type="text" value={searchTerm} onChange={event => setSearchTerm(event.target.value)} placeholder="Spider..."  />
           {errorMessage ? <div className='text-red-600'>{errorMessage}</div>: ''}
